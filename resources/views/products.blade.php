@@ -5,7 +5,11 @@
     <a href="{{url('/car-registration')}}" class="btn btn-primary w-170">Add New Car</a>
 </div>
 
-
+@if(session('success_message'))
+  <div id="alert_message" class="mt-3 alert alert-success alert-dismissible col-md-12">
+    <strong>{{session('success_message')}}</strong>
+  </div>
+@endif
 <div class="row mb-4">
     <div class="col-lg-12">
         <div class="card-common">
@@ -24,98 +28,45 @@
                                 <th>Color</th>
                                 <th>Regd. No.</th>
                                 <th>Horsepower</th>
+                                <th>View Documents</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($cars as $index=>$car)
                             <tr>
-                                <td class="tbl-id">01</td>
+                                <td class="tbl-id">{{++$index}}</td>
                                 <td>
-                                    <span class="tbl-name">Hyundai</span>
+                                    <span class="tbl-name">{{$car->mark}}</span>
                                 </td>
                                 <td>
-                                    Lorem Ipsum
+                                {{$car->model}}
                                 </td>
                                 <td>
-                                    2022
+                                {{$car->model_year}}
                                 </td>
                                 <td>
-                                    Black
+                                {{$car->color}}
                                 </td>
                                 <td>
-                                    123577554214
+                                {{$car->registration_no}}
                                 </td>
                                 <td>
-                                    1000
+                                {{$car->power}}
+                                </td>
+                                <td>
+                                    <a target="_blank" href="{{asset($car->document)}}"><button class="btn btn-primary">View Document</button></a>
                                 </td>
                                 <td>
                                     <div class="actions-col">
                                         <a href="{{url('/car-selling')}}"><img src="{{asset('assets/images/shopping-cart-tbl.svg')}}"></a>
-                                        <a href="{{url('/view-car-detail')}}"><img src="{{asset('assets/images/eye.svg')}}"></a>
+                                        <a href="{{url('/view-car-detail',$car->id)}}"><img src="{{asset('assets/images/eye.svg')}}"></a>
                                         <a href="#"><img src="{{asset('assets/images/edit.svg')}}"></a>
-                                        <a href="#"><img src="{{asset('assets/images/delete.svg')}}"></a>
+                                        <a href="{{url('delete_car', $car->id)}}"><img src="{{asset('assets/images/delete.svg')}}"></a>
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="tbl-id">01</td>
-                                <td>
-                                    <span class="tbl-name">Hyundai</span>
-                                </td>
-                                <td>
-                                    Lorem Ipsum
-                                </td>
-                                <td>
-                                    2022
-                                </td>
-                                <td>
-                                    Black
-                                </td>
-                                <td>
-                                    123577554214
-                                </td>
-                                <td>
-                                    1000
-                                </td>
-                                <td>
-                                    <div class="actions-col">
-                                        <a href="{{url('/car-selling')}}"><img src="{{asset('assets/images/shopping-cart-tbl.svg')}}"></a>
-                                        <a href="{{url('/view-car-detail')}}"><img src="{{asset('assets/images/eye.svg')}}"></a>
-                                        <a href="#"><img src="{{asset('assets/images/edit.svg')}}"></a>
-                                        <a href="#"><img src="{{asset('assets/images/delete.svg')}}"></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="tbl-id">01</td>
-                                <td>
-                                    <span class="tbl-name">Hyundai</span>
-                                </td>
-                                <td>
-                                    Lorem Ipsum
-                                </td>
-                                <td>
-                                    2022
-                                </td>
-                                <td>
-                                    Black
-                                </td>
-                                <td>
-                                    123577554214
-                                </td>
-                                <td>
-                                    1000
-                                </td>
-                                <td>
-                                    <div class="actions-col">
-                                        <a href="{{url('/car-selling')}}"><img src="{{asset('assets/images/shopping-cart-tbl.svg')}}"></a>
-                                        <a href="{{url('/view-car-detail')}}"><img src="{{asset('assets/images/eye.svg')}}"></a>
-                                        <a href="#"><img src="{{asset('assets/images/edit.svg')}}"></a>
-                                        <a href="#"><img src="{{asset('assets/images/delete.svg')}}"></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            
+                            @endforeach
                         </tbody>
                         <tfoot>
                             <tr>

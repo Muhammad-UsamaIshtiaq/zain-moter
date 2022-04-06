@@ -12,24 +12,40 @@
             <div class="inner-container">
                 <div class="login-img"><img src="{{asset('assets/images/car.svg')}}"></div>
                 <div class="login-form">
-                    <form action="index.html">
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
                         <div class="log-form-fields mb-4">
                             <div class="login-form-icon">
                                 <img src="{{asset('assets/images/email.svg')}}">
                             </div> 
-                            <input type="email" class="form-control" id="" placeholder="name@example.com">
+                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="" placeholder="name@example.com">
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="log-form-fields mb-4">
                             <div class="login-form-icon">
                                 <img src="{{asset('assets/images/password.svg')}}">
                             </div>
-                            <input type="password" class="form-control" id="" placeholder="Password">
+                            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="" placeholder="Password">
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="remember-me mb-4">
                             <div class="checkbox-box"><input type="checkbox" id="remember-me"></div>
                             <label for="remember-me">Remeber Me</label>
                         </div>
-                        <a href="{{url('/')}}" class="btn btn-primary btn-login btn-full">Sign In</a>
+                        <button class="btn btn-primary btn-login btn-full">Sign In</button>
+                        @if (Route::has('password.request'))
+                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        {{ __('Forgot Your Password?') }}
+                                    </a>
+                                @endif
                     </form>
                 </div>
             </div>

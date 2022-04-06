@@ -6,7 +6,7 @@
             <div class="sidebar-nav">
                 <ul>
                     <li class="sidebar-list active">
-                        <a href="{{url('/')}}">
+                        <a href="{{url('/home')}}">
                             <span class="icon">
                                     <img class="grey" src="{{asset('assets/images/dashboard.svg')}}">
                                     <img class="white" src="{{asset('assets/images/dashboard-white.svg')}}">

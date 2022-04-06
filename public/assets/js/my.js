@@ -169,3 +169,36 @@
         $('.local-v-row').hide();
         $('.local-v-input').val('');
     });
+    $(".add_more").on('click',function(){
+        $("#partners").append(` <div class="col-lg-6 form-group">
+            <input type="text" name="partner_name[]" class="form-control part-input partner_name" placeholder="Partener">
+        </div>
+        <div class="col-lg-6 form-group">
+            <input type="text" name="partner_percentage[]" class="form-control part-input partner_percentage" placeholder="Percentage">
+        </div>`);
+    });
+
+    $("#registration_form").on('submit',function(){
+        var submit = true;
+        $(".errors").remove();
+        if($("#partnership").prop("checked"))
+        {
+            $(".partner_name").each(function(){
+                if($(this).val()=="")
+                {
+                    $(this).parent().append(`<p class="text-danger errors">Partner Name is required</p>`);
+                    submit = false;
+                }
+            });
+
+            $(".partner_percentage").each(function(){
+                if($(this).val()=="")
+                {
+                    $(this).parent().append(`<p class="text-danger errors">Partner Percentage is required</p>`);
+                    submit = false;
+                }
+            });
+        }
+        if(!submit)
+        return false;
+    });
